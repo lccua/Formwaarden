@@ -1,28 +1,27 @@
 const setup = () => {
 	let button = document.querySelector("#btnToon");
-    button.addEventListener("click", toonFavorieteBuurland)
-
-
+    button.addEventListener("click",  toonIsRoker)
 }
-
 
 const toonIsRoker = () =>{
 
+    let chkPriority = document.querySelector("#chkIsRoker");
 
+    if (chkPriority.checked){
+        console.log("is een roker")
+    }
+    else{
+        console.log("is geen roker")
+    }
+
+    toonMoedertaal()
 }
 
 const toonMoedertaal = () =>{
-    let radioButtons = document.querySelectorAll('input[name="rbtMoedertaal"]');
-    let selectedRadioButton;
+    let rbtMoedertaal = document.querySelector("input[name='rbtMoedertaal']:checked");
+    console.log("moedertaal is "+rbtMoedertaal.value);
 
-    radioButtons.forEach((radioButton) => {
-        if (radioButton.checked) {
-            selectedRadioButton = radioButton;
-        }
-    });
-
-    console.log(selectedRadioButton.value);
-    
+    toonFavorieteBuurland()
 
 }
 
@@ -32,22 +31,19 @@ const toonFavorieteBuurland = () =>{
     let index = select.selectedIndex;
 
     let option = select.options[index];
-    console.log(option.textContent);
+    console.log("Uw favoriete buurland is: "+ option.textContent);
     toonBestelling()
 }
 
 const toonBestelling = () =>{
 
     let selectedOptions = document.querySelectorAll("#selBestelling option:checked");
-
+    let string = "";
     selectedOptions.forEach(option => {
-        console.log(option.value);
+        string = string + ` ${option.value}`;
     });
-
-    toonMoedertaal()
+    console.log(`Dit is de bestelling:${string}`)
 
 }
-
-
 
 window.addEventListener("load", setup);
